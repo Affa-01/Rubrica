@@ -26,4 +26,12 @@ public class Persona {
     public String getCognome() {
         return cognome;
     }
+
+    void applicaModifiche(Persona p) {
+        p.nome = this.nome;
+        p.cognome = this.cognome;
+        p.indirizzo = this.indirizzo;
+        p.telefono = this.telefono;
+        p.età = this.età;
+    }
 }

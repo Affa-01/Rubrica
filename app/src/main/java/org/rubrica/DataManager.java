@@ -17,7 +17,7 @@ public class DataManager {
         persone.add(p);
     }
 
-    void modifica(int id, PersonaModifiche pm) {
+    void modifica(int id, Persona pm) {
         Persona p = persone.get(id);
         pm.applicaModifiche(p);
     }
@@ -28,5 +28,9 @@ public class DataManager {
 
     public Vector<Persona> getPersone() {
         return persone;
+    }
+
+    public Persona getPersona(int id) {
+        return persone.get(id);
     }
 }

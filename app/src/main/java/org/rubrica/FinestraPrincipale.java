@@ -1,10 +1,14 @@
 package org.rubrica;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,15 +27,10 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        
-        String[] nomiColonne = { "Nome", "Cognome", "Telefono"};
-        DefaultTableModel model = new DefaultTableModel(nomiColonne, 0);
-        for (Persona p : dm.getPersone()) {
-            Object[] row = { p.getNome(), p.getCognome(), p.getTelefono() };
-            model.addRow(row);
-        }
-        table = new JTable(model);
-        add(table, BorderLayout.CENTER);
+        table = new JTable();
+        generaTabella();
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane, BorderLayout.CENTER);
 
         JPanel barraBottoni = new JPanel(new FlowLayout());
         add(barraBottoni, BorderLayout.SOUTH);
@@ -45,27 +44,39 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
         buttonModifica = new JButton("Modifica");
         barraBottoni.add(buttonModifica);
         buttonModifica.addActionListener(this);
-        buttonNuovo.setActionCommand("MODIFICA");
+        buttonModifica.setActionCommand("MODIFICA");
 
         buttonElimina = new JButton("Elimina");
         barraBottoni.add(buttonElimina);
         buttonElimina.addActionListener(this);
-        buttonNuovo.setActionCommand("ELIMINA");
+        buttonElimina.setActionCommand("ELIMINA");
 
         setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int id;
         switch (e.getActionCommand()) {
             case "NUOVO":
                 apriFinestraNuovo();
                 break;
             case "MODIFICA":
-                apriFinestraModifica();
+                id = table.getSelectedRow();
+                if (id == -1) {
+                    JOptionPane.showMessageDialog(null, "Nessuna riga selezionata", "Errore", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                apriFinestraModifica(id);
                 break;
             case "ELIMINA":
-                
+                id = table.getSelectedRow();
+                if (id == -1) {
+                    JOptionPane.showMessageDialog(null, "Nessuna riga selezionata", "Errore", JOptionPane.ERROR_MESSAGE); 
+                    return;
+                }
+                elimina(id);
+                generaTabella();
                 break;
         
             default:
@@ -75,9 +86,30 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
     }
 
     private void apriFinestraNuovo() {
-        FinestraNuovo fn = new FinestraNuovo(dm);
+        new FinestraNuovo(this, dm);
     }
-    private void apriFinestraModifica() {
-        FinestraModifica fm = new FinestraModifica(dm);
+    private void apriFinestraModifica(int id) {
+        new FinestraModifica(this, dm, id);
+    }
+
+    private void elimina(int id) {
+        dm.elimina(id);
+    }
+
+    public void generaTabella() {
+        String[] nomiColonne = { "Nome", "Cognome", "Telefono"};
+        DefaultTableModel model = new DefaultTableModel(nomiColonne, 0){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        for (Persona p : dm.getPersone()) {
+            Object[] row = { p.getNome(), p.getCognome(), p.getTelefono() };
+            model.addRow(row);
+        } 
+
+        table.setModel(model);
     }
 }
