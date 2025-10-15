@@ -1,4 +1,0 @@
-Mario;Rossi;Via Roma 1;1234567890;30
-Luigi;Verdi;Via Milano 2;0987654320;25
-Anna;Bianchi;Via Napoli 3;1122334455;28
-Jan;Novak;via Praga 4;7568274297;17

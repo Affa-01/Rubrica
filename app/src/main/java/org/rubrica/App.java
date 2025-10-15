@@ -7,11 +7,18 @@ package org.rubrica;
 public class App {
 
     public static void main(String[] args) {
+        DataManager dm = null;
+        try{
+            dm = new DataManager();
+        } catch (Exception e) {
+            System.err.println("Errore durante l'inizializzazione del DataManager: " + e.getMessage());
+            return;
+        }
 
-        DataManager dm = new DataManager();
-
-        FinestraPrincipale fp = new FinestraPrincipale(dm);
+        new FinestraPrincipale(dm);
         
         
     }
+
+    
 }

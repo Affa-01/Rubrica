@@ -3,6 +3,7 @@ package org.rubrica;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -108,10 +109,15 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
                 return false;
             }
         };
-
-        for (Persona p : dm.getPersone()) {
-            Object[] row = { p.getNome(), p.getCognome(), p.getTelefono() };
-            model.addRow(row);
+        
+        try {
+            for (Persona p : dm.getPersone()) {
+                Object[] row = { p.getNome(), p.getCognome(), p.getTelefono() };
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Errore nella download dal DB", "Errore", JOptionPane.ERROR_MESSAGE); 
         } 
 
         table.setModel(model);
