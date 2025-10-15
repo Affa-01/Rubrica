@@ -5,14 +5,14 @@ public class Persona {
     String cognome;
     String indirizzo;
     String telefono;
-    int età;
+    int eta;
 
-    public Persona(String nome, String cognome, String indirizzo, String telefono, int età) {
+    public Persona(String nome, String cognome, String indirizzo, String telefono, int eta) {
         this.nome = nome;
         this.cognome = cognome;
         this.indirizzo = indirizzo;
         this.telefono = telefono;
-        this.età = età;
+        this.eta = eta;
     }
 
     public String getNome() {
@@ -32,11 +32,11 @@ public class Persona {
         p.cognome = this.cognome;
         p.indirizzo = this.indirizzo;
         p.telefono = this.telefono;
-        p.età = this.età;
+        p.eta = this.eta;
     }
 
     @Override
     public String toString() {
-        return nome + ";" + cognome + ";" + indirizzo + ";" + telefono + ";" + età;
+        return nome + ";" + cognome + ";" + indirizzo + ";" + telefono + ";" + eta;
     }
 }

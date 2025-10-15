@@ -56,9 +56,9 @@ public abstract class EditorPersona extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "SALVA":
-                String stringEtà = campiTesto[4].getText();
+                String stringEta = campiTesto[4].getText();
                 try {
-                    Integer.parseInt(stringEtà);
+                    Integer.parseInt(stringEta);
                     salva();
                     this.dispose();
                 } catch (NumberFormatException ex) {

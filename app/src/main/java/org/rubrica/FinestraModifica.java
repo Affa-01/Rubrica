@@ -30,6 +30,6 @@ public class FinestraModifica extends EditorPersona {
         campiTesto[1].setText(p.getCognome());
         campiTesto[2].setText(p.indirizzo);
         campiTesto[3].setText(p.getTelefono());
-        campiTesto[4].setText(Integer.toString(p.età));
+        campiTesto[4].setText(Integer.toString(p.eta));
     }
 }
