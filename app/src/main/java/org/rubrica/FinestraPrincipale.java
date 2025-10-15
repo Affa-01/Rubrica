@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
     JButton buttonElimina;
     JTable table;
     DataManager dm;
+    Vector<Persona> persone;
 
     public FinestraPrincipale(DataManager dm) {
         this.dm = dm;
@@ -57,30 +59,30 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int id;
+        int idx;
         switch (e.getActionCommand()) {
             case "NUOVO":
                 apriFinestraNuovo();
                 break;
             case "MODIFICA":
-                id = table.getSelectedRow();
-                if (id == -1) {
+                idx = table.getSelectedRow();
+                if (idx == -1) {
                     JOptionPane.showMessageDialog(null, "Nessuna riga selezionata", "Errore", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                apriFinestraModifica(id);
+                apriFinestraModifica(persone.get(idx).getId());
                 break;
             case "ELIMINA":
-                id = table.getSelectedRow();
-                if (id == -1) {
+                idx = table.getSelectedRow();
+                if (idx == -1) {
                     JOptionPane.showMessageDialog(null, "Nessuna riga selezionata", "Errore", JOptionPane.ERROR_MESSAGE); 
                     return;
                 }
-                Persona p = dm.getPersona(id);
+                Persona p = dm.getPersona(persone.get(idx).getId());
                 int input = JOptionPane.showConfirmDialog(null, "Eliminare la persona " + p.getNome() + " " + p.getCognome() + "?", "Conferma eliminazione", JOptionPane.YES_NO_CANCEL_OPTION);
                 // 0=yes, 1=no, 2=cancel
                 if(input != 0) return;
-                elimina(id);
+                elimina(persone.get(idx).getId());
                 generaTabella();
                 break;
         
@@ -111,7 +113,8 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
         };
         
         try {
-            for (Persona p : dm.getPersone()) {
+            persone = dm.getPersone();
+            for (Persona p : persone) {
                 Object[] row = { p.getNome(), p.getCognome(), p.getTelefono() };
                 model.addRow(row);
             }
