@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
@@ -55,8 +56,14 @@ public abstract class EditorPersona extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "SALVA":
-                salva();
-                this.dispose();
+                String stringEtà = campiTesto[4].getText();
+                try {
+                    Integer.parseInt(stringEtà);
+                    salva();
+                    this.dispose();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Età non valida", "Errore", JOptionPane.ERROR_MESSAGE); 
+                }
                 break;
             case "ANNULLA":
                 this.dispose();

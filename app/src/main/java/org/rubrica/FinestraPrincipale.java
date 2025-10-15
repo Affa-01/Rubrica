@@ -75,6 +75,10 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Nessuna riga selezionata", "Errore", JOptionPane.ERROR_MESSAGE); 
                     return;
                 }
+                Persona p = dm.getPersona(id);
+                int input = JOptionPane.showConfirmDialog(null, "Eliminare la persona " + p.getNome() + " " + p.getCognome() + "?", "Conferma eliminazione", JOptionPane.YES_NO_CANCEL_OPTION);
+                // 0=yes, 1=no, 2=cancel
+                if(input != 0) return;
                 elimina(id);
                 generaTabella();
                 break;

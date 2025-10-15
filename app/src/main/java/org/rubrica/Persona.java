@@ -34,4 +34,9 @@ public class Persona {
         p.telefono = this.telefono;
         p.età = this.età;
     }
+
+    @Override
+    public String toString() {
+        return nome + ";" + cognome + ";" + indirizzo + ";" + telefono + ";" + età;
+    }
 }
