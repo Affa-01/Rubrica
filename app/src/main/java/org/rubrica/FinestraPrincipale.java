@@ -8,6 +8,9 @@ import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -53,6 +56,75 @@ public class FinestraPrincipale extends JFrame implements ActionListener {
         barraBottoni.add(buttonElimina);
         buttonElimina.addActionListener(this);
         buttonElimina.setActionCommand("ELIMINA");
+
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+
+        JMenu menuFile = new JMenu("Esporta...");
+        menuBar.add(menuFile);
+
+        JMenuItem menuEsportaCSV = new JMenuItem("CSV");
+        menuFile.add(menuEsportaCSV);
+        menuEsportaCSV.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dm.esportaCSV("rubrica.csv");
+                    JOptionPane.showMessageDialog(null, "Esportazione completata", "Info", JOptionPane.INFORMATION_MESSAGE); 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Errore nell'esportazione", "Errore", JOptionPane.ERROR_MESSAGE); 
+                }
+            }
+        });
+
+        JMenuItem menuEsportaJSON = new JMenuItem("JSON");
+        menuFile.add(menuEsportaJSON);
+        menuEsportaJSON.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dm.esportaJSON("rubrica.json");
+                    JOptionPane.showMessageDialog(null, "Esportazione completata", "Info", JOptionPane.INFORMATION_MESSAGE); 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Errore nell'esportazione", "Errore", JOptionPane.ERROR_MESSAGE); 
+                }
+            }
+        });
+
+        JMenuItem menuEsportaXML = new JMenuItem("XML");
+        menuFile.add(menuEsportaXML);
+        menuEsportaXML.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dm.esportaXML("rubrica.xml");
+                    JOptionPane.showMessageDialog(null, "Esportazione completata", "Info", JOptionPane.INFORMATION_MESSAGE); 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Errore nell'esportazione", "Errore", JOptionPane.ERROR_MESSAGE); 
+                }
+            }
+        });
+
+        JMenuItem menuEsportaYML = new JMenuItem("YAML");
+        menuFile.add(menuEsportaYML);
+        menuEsportaYML.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    dm.esportaYML("rubrica.yml");
+                    JOptionPane.showMessageDialog(null, "Esportazione completata", "Info", JOptionPane.INFORMATION_MESSAGE); 
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Errore nell'esportazione", "Errore", JOptionPane.ERROR_MESSAGE); 
+                }
+            }
+        });
+
+
+        
 
         setVisible(true);
     }

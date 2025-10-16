@@ -57,8 +57,7 @@ public class Persona {
         p.eta = this.eta;
     }
 
-    @Override
-    public String toString() {
+    public String toCsv() {
         return nome + ";" + cognome + ";" + indirizzo + ";" + telefono + ";" + eta;
     }
 }

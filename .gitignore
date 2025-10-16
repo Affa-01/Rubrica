@@ -6,4 +6,8 @@ build
 
 .vscode
 
-credenziali_database.properties
+# ignora file di output
+rubrica.csv
+rubrica.xml
+rubrica.json
+rubrica.yml
