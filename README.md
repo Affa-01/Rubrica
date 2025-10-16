@@ -5,7 +5,7 @@
 ## Aggiunte Extra
 
 - Persistenza mantenuta tramite database MySQL
-- Export possibili nei formati csv, json, xml e 
+- Export possibili nei formati csv, json, xml e yml
 
 ## Compilazione
 Creare il jar tramite
