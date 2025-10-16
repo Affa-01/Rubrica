@@ -13,6 +13,7 @@ plugins {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
@@ -42,7 +43,7 @@ tasks.register<Jar>("fatJar") {
     archiveClassifier.set("all")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
-        attributes["Main-Class"] = application.mainClass.get()
+        attributes("Main-Class" to "org.rubrica.App")
     }
     from(sourceSets.main.get().output)
     dependsOn(configurations.runtimeClasspath)
